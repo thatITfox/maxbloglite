@@ -4,14 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Max's blog site</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <div>
-        <img src="/static/welcome.png" alt="Hewwo :3">
+    <div id="header">
+        <a href="/">Max The Computer Fox</a>
+        <ul class="header-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/articles">Posts</a></li>
+            <li><a href="/search">Search</a></li>
+        </ul>
     </div>
-    <div>
-        <p>To see max latest articles, you can search right here: </p>
-        <a href="/articles">Articles</a>
+
+    <div id="index-home">
+        <div>
+            <img src="/static/welcome.png" alt="Hewwo :3">
+        </div>
+        <div>
+            <p>To see max latest articles, you can search right here: </p>
+            <a href="/articles">Articles</a>
+        </div>
     </div>
+    
 </body>
 </html>

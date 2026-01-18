@@ -3,7 +3,7 @@ from blog import listarticles, renderarticle
 import os
 
 # check if there exist an articles folder, if not make one:
-if os.path.exists("articles"):
+if not os.path.exists("articles"):
     os.mkdir("articles")
 
 app = Flask(__name__)
@@ -26,8 +26,11 @@ def post(filename: str):
     safe_filename = filename.strip().replace("\n", "").replace("\r", "")
     safe_filename = os.path.normpath(safe_filename)
 
+    with open(f"articles/{safe_filename}.md", "r") as f:
+        title = f.readline().strip().replace("#", "")
+
     html = renderarticle(f"articles/{safe_filename}.md")
-    return render_template("post.html", content=html)
+    return render_template("post.html", content=html, title=title)
 
 @app.route("/search")
 def search():
