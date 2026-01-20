@@ -8,22 +8,24 @@
 </head>
 <body>
     <div id="header">
+        <a href="/">Max The Computer Fox</a>
         <ul class="header-links">
             <li><a href="/">Home</a></li>
             <li><a href="/articles">Posts</a></li>
             <li><a href="/search">Search</a></li>
         </ul>
     </div>
-
-    <ul>
-        {%for article in articles%}
-            <li>
-                {{article.date}}
-                <a href="/post/{{article.file}}"> {{article.title}}</a>
-            </li>
-        {% else %}
-            <li><em>No users found</em></li>
-        {% endfor %}
-    </ul>
+    <div id="post-list">
+        <ul>
+            {%for article in articles%}
+                <li>
+                    {{article.date}}
+                    <a href="/post/{{article.file}}" class="post-link"> {{article.title}}</a>
+                </li>
+            {% else %}
+                <li><em>No posts found</em></li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
