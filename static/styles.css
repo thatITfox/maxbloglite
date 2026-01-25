@@ -2,6 +2,10 @@
 @import url("https://fonts.cdnfonts.com/css/vcr-osd-mono");
 
 /* # Glocal scoped css */
+html {
+    height: 100%;
+}
+
 body {
     background-color: #4b5563;
     margin: 0px;
@@ -10,17 +14,19 @@ body {
 #header {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 90%;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    margin-left: auto;
+    margin-right: auto;
     box-sizing: border-box;
+
 }
 
 #header ul {
     list-style-type: none;
     display: flex;
-    width: 25%;
+    padding-left: 0px;
+    gap: 1.5rem;
     justify-content: space-evenly;
 }
 
@@ -30,15 +36,29 @@ body {
     font-family: VCR OSD Mono;
 }
 
+#header #main-header-title {
+    font-size: 20px;
+}
+
 /* Index scoped css */
 #index-home {
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50%;
 }
 
 #welcome-tags {
     display: flex;
     justify-content: center;
+    width: 50%;
+}
+#welcome-tags img {
+    max-width: 100%;
+    height: auto;
 }
 
 #welcome-page {
@@ -48,20 +68,123 @@ body {
     align-items: center;
     font-family: VCR OSD mono;
     color: white;
+    text-align: center;
+    width: 50%;
 }
 
 #welcome-page a {
     color: white;
 }
 
+/* post/article scoped css */
+.content-post {
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+    color: white;
+    font-family: VCR OSD Mono;
+}
+
+.content-post a {
+    color: rgb(165 243 252);
+}
+
+/* article list scoped css */
+#post-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.post-box {
+    width: 80%;
+    height: 10vh;
+    background-color: rgb(107, 114, 128);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: white;
+    font-family: VCR OSD Mono;
+}
+
+.post-box .post-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+#post-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem;
+}
+
+#post-navigation a {
+    color: white;
+    font-family: VCR OSD Mono;
+}
+
+#current-page {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-family: VCR OSD Mono;
+    font-size: 2rem;
+}
+
+#no-posts {
+    color: white;
+    font-family: VCR OSD Mono;
+    font-size: 2rem;
+}
+
+/* for the error page */
+#error-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+}
+
+/* for the about page */
+#about-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: VCR OSD Mono;
+    text-align: center;
+    width: 100% ;
+}
+
+#about-page p {
+    width: 90%;
+}
+
+/* I might want to add another css file for custom text sizing on posts*/
+
+/* for when the screen change */
 @media (orientation: portrait) {
     #index-home {
         flex-direction: column;
     }
+
+    /* index stuff */
+    #welcome-tags {
+        width: 100%;
+    }
+    #welcome-page {
+        width: 100%;
+    }
 }
-
-/* post/article scoped css */
-
-
-/* article list scoped css */
-

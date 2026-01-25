@@ -4,11 +4,15 @@ import markdown
 import warnings
 import os
 
-def listarticles() -> list:
+def listarticles(pagination=10, page=1) -> list:
     files = os.listdir("articles/")
+    files = sorted(files, reverse=True)
+    files = files[pagination*(page-1):pagination*(page)]
     working_articles = []
 
     for file in files:
+        if file == "files": continue
+
         file_name = Path(file).stem # removes the .md part of the file
 
         # checks if the start of the file contains the date

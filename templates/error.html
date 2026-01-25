@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search for the article you need</title>
+    <title>Welcome to Max's blog site</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/main.js" defer></script>
 </head>
 <body>
     <div id="header">
-        <a href="/">Max The Computer Fox</a>
+        <a href="/" id="main-header-title">Max The Computer Fox</a>
         <ul class="header-links">
             <li><a href="/">Home</a></li>
             <li><a href="/articles">Posts</a></li>
-            <li><a href="/search">Search</a></li>
+            <li><a href="/about">About</a></li>
         </ul>
     </div>
-
-    <div>
-        <p>WIP</p>
+    <div id="error-content">
+        {{error}}
     </div>
 </body>
 </html>

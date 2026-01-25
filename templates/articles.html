@@ -5,27 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>list of latest articles</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/main.js" defer></script>
 </head>
 <body>
     <div id="header">
-        <a href="/">Max The Computer Fox</a>
+        <a href="/" id="main-header-title">Max The Computer Fox</a>
         <ul class="header-links">
             <li><a href="/">Home</a></li>
             <li><a href="/articles">Posts</a></li>
-            <li><a href="/search">Search</a></li>
+            <li><a href="/about">About</a></li>
         </ul>
     </div>
+
+    <div id="current-page">
+        Page: {{current_page}}
+    </div>
+
     <div id="post-list">
-        <ul>
-            {%for article in articles%}
-                <li>
-                    {{article.date}}
-                    <a href="/post/{{article.file}}" class="post-link"> {{article.title}}</a>
-                </li>
+        {%for article in articles%}
+                <div class="post-box">
+                    <a href="/post/{{article.file}}" class="post-link">
+                        {{article.title}}
+                    </a>
+                    <p>{{article.date}}</p>
+                </div>
             {% else %}
-                <li><em>No posts found</em></li>
+                <div id="no-posts">No posts found</div>
             {% endfor %}
-        </ul>
     </div>
+    <div id="post-navigation">
+        <a href="/articles?page={{current_page-1}}">&lt&lt Prev</a> 
+        <a href="/articles?page={{current_page+1}}">Next &gt&gt</a>
+    </div>
+    <br>
 </body>
 </html>
