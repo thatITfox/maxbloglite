@@ -84,10 +84,15 @@ body {
     padding-right: 5%;
     color: white;
     font-family: VCR OSD Mono;
+    /* font-size: 0.9rem; */
 }
 
 .content-post a {
     color: rgb(165 243 252);
+}
+
+.content-post h1, h2, h3, h4, h5, h6 {
+    text-align: center;
 }
 
 /* article list scoped css */

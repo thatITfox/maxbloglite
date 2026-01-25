@@ -1,5 +1,8 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, Response, request, render_template, send_from_directory
 from blog import listarticles, renderarticle
+import urllib.parse
+import datetime
+import rfeed
 import os
 
 # check if there exist an articles folder, if not make one:
@@ -65,7 +68,29 @@ def about():
 
 @app.route("/feed.xml")
 def feed():
-    return "WIP"
+    articles = listarticles(-1)
+    feeded_articles = []
+    for post in articles:
+        post: dict
+        print(post)
+        print(urllib.parse.quote(post.get('file')))
+        item_post = rfeed.Item(
+            title=post.get("title"),
+            link=f"https://maxthecomputerfox.online/post/{urllib.parse.quote(post.get('file'))}",
+            author="Max",
+            pubDate=datetime.datetime.strptime(post.get("date"), "%Y/%m/%d")
+        )
+        feeded_articles.append(item_post)
+    
+    feed = rfeed.Feed(
+        title="Max The Computer Fox's small bloggin site",
+        link="https://maxthecomputerfox.online/",
+        description="Welcome to Max's blogging site, where I make and post my crazy ideas",
+        language="en-US",
+        items=feeded_articles
+    )
+
+    return Response(feed.rss(), mimetype="application/xml")
 
 @app.route("/favicon.ico")
 def favicon():
