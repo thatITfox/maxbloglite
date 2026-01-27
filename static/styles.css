@@ -11,6 +11,10 @@ body {
     margin: 0px;
 }
 
+a {
+    color: rgb(165 243 252);
+}
+
 #header {
     display: flex;
     justify-content: space-between;
@@ -72,26 +76,35 @@ body {
     width: 50%;
 }
 
-#welcome-page a {
-    color: white;
-}
-
 /* post/article scoped css */
 .content-post {
     display: flex;
     flex-direction: column;
-    padding-left: 5%;
-    padding-right: 5%;
+    flex: 1;
+    max-width: 900px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: auto;
     color: white;
-    font-family: VCR OSD Mono;
-    /* font-size: 0.9rem; */
-}
-
-.content-post a {
-    color: rgb(165 243 252);
+    font-family: Libre Franklin, sans-serif;
 }
 
 .content-post h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+    font-family: VCR OSD Mono;
+}
+
+.content-post img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#footer {
+    width: 100%;
+    padding: 1rem;
+    color: white;
+    font-family: VCR OSD Mono;
     text-align: center;
 }
 
@@ -106,7 +119,8 @@ body {
 
 .post-box {
     width: 80%;
-    height: 10vh;
+    height: auto;
+    min-height: 100px;
     background-color: rgb(107, 114, 128);
     border-radius: 5px;
     display: flex;
@@ -116,12 +130,16 @@ body {
     margin-bottom: 1rem;
     color: white;
     font-family: VCR OSD Mono;
+    text-align: center;
 }
 
 .post-box .post-link {
     color: white;
     text-decoration: none;
     font-size: 1.5rem;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #post-navigation {

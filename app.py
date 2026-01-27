@@ -29,7 +29,6 @@ def articles():
             error="sorry, but that's not a page number comrade"
         ), 500
 
-    prev_page, next_page = user_page-1, user_page+1
     availabe_articles = listarticles(pagination=10, page=user_page)
     return render_template(
         "articles.html",
@@ -50,7 +49,7 @@ def post(filename: str):
         title = f.readline().strip().replace("#", "")
 
     html = renderarticle(f"articles/{safe_filename}.md")
-    return render_template("post.html", content=html, title=title)
+    return render_template("post.html", content=html, title=title, year=datetime.datetime.now().year)
 
 
 @app.route("/files/<filename>")
@@ -101,4 +100,4 @@ def favicon():
     )
 
 if __name__ == "__main__":
-    app.run("0.0.0.0", 8000)
+    app.run("0.0.0.0", 80)
