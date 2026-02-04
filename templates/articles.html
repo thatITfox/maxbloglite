@@ -24,18 +24,20 @@
 
     <div id="post-list">
         {%for article in articles%}
-                <div class="post-box">
-                    <a href="/post/{{article.file}}" class="post-link">
-                        {{article.title}}
-                    </a>
-                    <p>{{article.date}}</p>
-                </div>
-            {% else %}
-                <div id="no-posts">No posts found</div>
-            {% endfor %}
+            <div class="post-box">
+                <a href="/post/{{article.file}}" class="post-link">
+                    {{article.title}}
+                </a>
+                <p>{{article.date}}</p>
+            </div>
+        {% else %}
+            <div id="no-posts">No posts found</div>
+        {% endfor %}
     </div>
     <div id="post-navigation">
-        <a href="/articles?page={{current_page-1}}">&lt&lt Prev</a> 
+        {% if current_page > 1 %}
+        <a href="/articles?page={{current_page-1}}">&lt&lt Prev</a>
+        {% endif %}
         <a href="/articles?page={{current_page+1}}">Next &gt&gt</a>
     </div>
     <br>
