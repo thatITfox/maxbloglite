@@ -52,7 +52,7 @@ def post(filename: str):
     return render_template("post.html", content=html, title=title, year=datetime.datetime.now().year)
 
 
-@app.route("articles/files/<filename>")
+@app.route("/articles/files/<filename>")
 def files(filename: str):
     # This is used to send readers files, images, and other attachments
     # also do not worry about LFI or other vulns, here we use a safe
