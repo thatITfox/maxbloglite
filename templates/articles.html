@@ -38,7 +38,10 @@
         {% if current_page > 1 %}
         <a href="/articles?page={{current_page-1}}">&lt&lt Prev</a>
         {% endif %}
+        
+        {% if articles|count >= 10 %}
         <a href="/articles?page={{current_page+1}}">Next &gt&gt</a>
+        {% endif %}
     </div>
     <br>
 </body>

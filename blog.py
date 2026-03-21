@@ -6,7 +6,7 @@ import os
 
 def listarticles(pagination=-1, page=1) -> list:
     files = os.listdir("articles/")
-    files = sorted(files, reverse=True)
+    files = sorted(files, reverse=True)[1:]
 
     # if the pagination is set to -1, that means the user wants all
     # available articles, else, set the page
