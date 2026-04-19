@@ -6,10 +6,12 @@ import rfeed
 import os
 
 # check if there exist an articles folder, if not make one:
-if not os.path.exists("articles"):
-    os.mkdir("articles")
-if not os.path.exists("articles/files"):
-    os.mkdir("articles/files")
+if not os.path.exists("articles"): os.mkdir("articles")
+if not os.path.exists("articles/files"): os.mkdir("articles/files")
+
+# for private articles
+if not os.path.exists("private"): os.mkdir("private")
+if not os.path.exists("private/files"): os.mkdir("private/files")
 
 
 app = Flask(__name__)
@@ -60,6 +62,27 @@ def files(filename: str):
     safe_filename = filename.strip().replace("\n", "").replace("\r", "")
     safe_filename = os.path.normpath(safe_filename)
     return send_from_directory("articles/files", filename)
+
+
+# for privately shared articles, only accessible trough links and will not be indexed
+@app.route("/private/<filename>")
+def privpost(filename: str):
+    safe_filename = filename.strip().replace("\n", "").replace("\r", "")
+    safe_filename = os.path.normpath(safe_filename)
+
+    with open(f"private/{safe_filename}.md", "r") as f:
+        title = f.readline().strip().replace("#", "")
+
+    html = renderarticle(f"private/{safe_filename}.md")
+    return render_template("post.html", content=html, title=title, year=datetime.datetime.now().year)
+
+
+@app.route("/private/files/<filename>")
+def privfiles(filename: str):
+    safe_filename = filename.strip().replace("\n", "").replace("\r", "")
+    safe_filename = os.path.normpath(safe_filename)
+    return send_from_directory("private/files", filename)
+
 
 @app.route("/about")
 def about():
