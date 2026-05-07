@@ -1,4 +1,5 @@
 from flask import Flask, Response, request, render_template, send_from_directory
+from werkzeug.exceptions import HTTPException
 from blog import listarticles, renderarticle
 import urllib.parse
 import datetime
@@ -121,6 +122,12 @@ def favicon():
         'favicon.ico',
         mimetype='image/vnd.microsoft.icon'
     )
+
+@app.errorhandler(Exception)
+def page_not_found(e):
+    if isinstance(e, HTTPException):
+        return render_template('error.html', error=e), e.code
+    return render_template("error.html", error="Something broke, max is on it"), 500
 
 if __name__ == "__main__":
     app.run("0.0.0.0", 80)

@@ -175,11 +175,13 @@ a {
 /* for the error page */
 #error-content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
     font-family: 'Courier New', Courier, monospace;
     font-size: 2rem;
+    text-align: center;
 }
 
 /* for the about page */
