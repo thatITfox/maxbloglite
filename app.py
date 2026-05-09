@@ -14,6 +14,10 @@ if not os.path.exists("articles/files"): os.mkdir("articles/files")
 if not os.path.exists("private"): os.mkdir("private")
 if not os.path.exists("private/files"): os.mkdir("private/files")
 
+def sanitize_filename(filename: str):
+    safe_filename = filename.strip().replace("\n", "").replace("\r", "")
+    safe_filename = os.path.normpath(f"/{safe_filename}")[1:]
+    return safe_filename
 
 app = Flask(__name__)
 
@@ -45,8 +49,7 @@ def post(filename: str):
     # CTF player and I know what you silly fluff butts usually try to do, so here
     # are some sanitization (but if you do found any vulnerabilities in this website 
     # ill gladly put you in an upcoming hall of fame):
-    safe_filename = filename.strip().replace("\n", "").replace("\r", "")
-    safe_filename = os.path.normpath(safe_filename)
+    safe_filename = sanitize_filename(filename)
 
     with open(f"articles/{safe_filename}.md", "r") as f:
         title = f.readline().strip().replace("#", "")
@@ -60,16 +63,14 @@ def files(filename: str):
     # This is used to send readers files, images, and other attachments
     # also do not worry about LFI or other vulns, here we use a safe
     # function from Flask
-    safe_filename = filename.strip().replace("\n", "").replace("\r", "")
-    safe_filename = os.path.normpath(safe_filename)
-    return send_from_directory("articles/files", filename)
+    safe_filename = sanitize_filename(filename)
+    return send_from_directory("articles/files", safe_filename)
 
 
 # for privately shared articles, only accessible trough links and will not be indexed
 @app.route("/private/<filename>")
 def privpost(filename: str):
-    safe_filename = filename.strip().replace("\n", "").replace("\r", "")
-    safe_filename = os.path.normpath(safe_filename)
+    safe_filename = sanitize_filename(filename)
 
     with open(f"private/{safe_filename}.md", "r") as f:
         title = f.readline().strip().replace("#", "")
@@ -80,9 +81,8 @@ def privpost(filename: str):
 
 @app.route("/private/files/<filename>")
 def privfiles(filename: str):
-    safe_filename = filename.strip().replace("\n", "").replace("\r", "")
-    safe_filename = os.path.normpath(safe_filename)
-    return send_from_directory("private/files", filename)
+    safe_filename = sanitize_filename(filename)
+    return send_from_directory("private/files", safe_filename)
 
 
 @app.route("/about")
