@@ -95,8 +95,6 @@ def feed():
     feeded_articles = []
     for post in articles:
         post: dict
-        print(post)
-        print(urllib.parse.quote(post.get('file')))
         item_post = rfeed.Item(
             title=post.get("title"),
             link=f"https://maxthecomputerfox.online/post/{urllib.parse.quote(post.get('file'))}",
@@ -108,6 +106,7 @@ def feed():
     feed = rfeed.Feed(
         title="Max The Computer Fox's small bloggin site",
         link="https://maxthecomputerfox.online/",
+        image="https://maxthecomputerfox.online/static/maxicon.png",
         description="Welcome to Max's blogging site, where I make and post my crazy ideas",
         language="en-US",
         items=feeded_articles
