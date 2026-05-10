@@ -106,7 +106,7 @@ def feed():
     feed = rfeed.Feed(
         title="Max The Computer Fox's small bloggin site",
         link="https://maxthecomputerfox.online/",
-        image="https://maxthecomputerfox.online/static/maxicon.png",
+        image=rfeed.Image("https://maxthecomputerfox.online/static/maxicon.png", "Max Icon", "https://maxthecomputerfox.online"),
         description="Welcome to Max's blogging site, where I make and post my crazy ideas",
         language="en-US",
         items=feeded_articles
@@ -122,11 +122,11 @@ def favicon():
         mimetype='image/vnd.microsoft.icon'
     )
 
-@app.errorhandler(Exception)
-def page_not_found(e):
-    if isinstance(e, HTTPException):
-        return render_template('error.html', error=e), e.code
-    return render_template("error.html", error="Something broke, max is on it"), 500
+# @app.errorhandler(Exception)
+# def page_not_found(e):
+#     if isinstance(e, HTTPException):
+#         return render_template('error.html', error=e), e.code
+#     return render_template("error.html", error="Something broke, max is on it"), 500
 
 if __name__ == "__main__":
     app.run("0.0.0.0", 80)
