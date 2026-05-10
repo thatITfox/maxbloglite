@@ -52,9 +52,8 @@ def listarticles(pagination=-1, page=1) -> list:
 def renderarticle(filepath) -> str:
     with open(filepath, "r") as f:
         articlemarkdown = f.read()
-    html = markdown.markdown(articlemarkdown)
+    html = markdown.markdown(articlemarkdown, extensions=["extra"])
     return html
-
 
 
 # print(listarticles())
