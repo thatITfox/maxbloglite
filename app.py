@@ -122,11 +122,11 @@ def favicon():
         mimetype='image/vnd.microsoft.icon'
     )
 
-# @app.errorhandler(Exception)
-# def page_not_found(e):
-#     if isinstance(e, HTTPException):
-#         return render_template('error.html', error=e), e.code
-#     return render_template("error.html", error="Something broke, max is on it"), 500
+@app.errorhandler(Exception)
+def page_not_found(e):
+    if isinstance(e, HTTPException):
+        return render_template('error.html', error=e), e.code
+    return render_template("error.html", error="Something broke, max is on it"), 500
 
 if __name__ == "__main__":
     app.run("0.0.0.0", 80)
