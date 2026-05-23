@@ -16,3 +16,11 @@ function handleOrientationChange(e) {
 handleOrientationChange(orientationQuery);
 // Listen for changes
 orientationQuery.addEventListener("change", handleOrientationChange);
+
+// code theming, stolen from my WriteUpRepo code.
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre').forEach(el => {
+        el.classList.add('theme-atom-one-dark');
+    });
+});
