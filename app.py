@@ -43,46 +43,43 @@ def articles():
         current_page=user_page
     )
 
-@app.route("/post/<filename>")
-def post(filename: str):
+# renderer for all types of articles, public, private, and maybe even more
+@app.route("/<content_type>/<filename>")
+def post(content_type: str, filename: str):
     # 100% unsafe shit without proper sanitization, luckly I am an experienced
     # CTF player and I know what you silly fluff butts usually try to do, so here
     # are some sanitization (but if you do found any vulnerabilities in this website 
     # ill gladly put you in an upcoming hall of fame):
+
+    safe_content_type = sanitize_filename(content_type)
     safe_filename = sanitize_filename(filename)
 
-    with open(f"articles/{safe_filename}.md", "r") as f:
+    if not (safe_content_type in ["private", "post"]):
+        return render_template("error.html", error="That's not a propper content type comrade"), 404
+    
+    # I know this is bad code design and more of a dumb hack, but it's too late to 
+    # redesign this as I want to minimize link rot
+    if safe_content_type == "post": safe_content_type = "articles"
+
+    with open(f"{safe_content_type}/{safe_filename}.md", "r") as f:
         title = f.readline().strip().replace("#", "")
 
-    html = renderarticle(f"articles/{safe_filename}.md")
+    html = renderarticle(f"{safe_content_type}/{safe_filename}.md")
     return render_template("post.html", content=html, title=title, year=datetime.datetime.now().year)
 
 
-@app.route("/articles/files/<filename>")
-def files(filename: str):
+@app.route("/<content_type>/files/<filename>")
+def files(content_type: str, filename: str):
     # This is used to send readers files, images, and other attachments
     # also do not worry about LFI or other vulns, here we use a safe
     # function from Flask
+
+    safe_content_type = sanitize_filename(content_type)
+    if not (safe_content_type in ["private", "articles"]):
+        return render_template("error.html", error="That's not a propper content type comrade"), 404
+    
     safe_filename = sanitize_filename(filename)
-    return send_from_directory("articles/files", safe_filename)
-
-
-# for privately shared articles, only accessible trough links and will not be indexed
-@app.route("/private/<filename>")
-def privpost(filename: str):
-    safe_filename = sanitize_filename(filename)
-
-    with open(f"private/{safe_filename}.md", "r") as f:
-        title = f.readline().strip().replace("#", "")
-
-    html = renderarticle(f"private/{safe_filename}.md")
-    return render_template("post.html", content=html, title=title, year=datetime.datetime.now().year)
-
-
-@app.route("/private/files/<filename>")
-def privfiles(filename: str):
-    safe_filename = sanitize_filename(filename)
-    return send_from_directory("private/files", safe_filename)
+    return send_from_directory(f"{safe_content_type}/files", safe_filename)
 
 
 @app.route("/about")
@@ -91,7 +88,7 @@ def about():
 
 @app.route("/feed.xml")
 def feed():
-    articles = listarticles(-1)
+    articles = listarticles(20)
     feeded_articles = []
     for post in articles:
         post: dict
