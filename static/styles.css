@@ -93,9 +93,10 @@ a {
     margin: auto;
     color: white;
     font-family: Libre Franklin, sans-serif;
+    overflow-wrap: break-word;
 }
 
-.content-post h1, h2, h3, h4, h5, h6 {
+.content-post :is(h1, h2, h3, h4, h5, h6) {
     text-align: center;
     font-family: VCR OSD Mono;
 }
@@ -105,6 +106,21 @@ a {
     margin-left: auto;
     margin-right: auto;
     max-width: 100%;
+}
+
+.content-post :is(table, th, td) {
+    text-align: center;
+    border: solid #e5e7eb;
+    border-collapse: collapse;
+    border-width: 1px;
+    padding: 5px;
+}
+.content-post th {
+    background-color: #0284c7;
+}
+
+.content-post td {
+    background-color: #075985;
 }
 
 #footer {
