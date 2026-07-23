@@ -54,7 +54,7 @@ def post(content_type: str, filename: str):
     safe_content_type = sanitize_filename(content_type)
     safe_filename = sanitize_filename(filename)
 
-    if not (safe_content_type in ["private", "post"]):
+    if not (safe_content_type in ["private", "articles", "post"]):
         return render_template("error.html", error="That's not a propper content type comrade"), 404
     
     # I know this is bad code design and more of a dumb hack, but it's too late to 
@@ -94,7 +94,7 @@ def feed():
         post: dict
         item_post = rfeed.Item(
             title=post.get("title"),
-            link=f"https://maxthecomputerfox.online/post/{urllib.parse.quote(post.get('file'))}",
+            link=f"https://maxthecomputerfox.online/articles/{urllib.parse.quote(post.get('file'))}",
             author="Max",
             pubDate=datetime.datetime.strptime(post.get("date"), "%Y/%m/%d")
         )
