@@ -1,0 +1,8 @@
+services:
+  maxbloglite:
+    build: .
+    ports:
+      - "8000:80"
+    volumes:
+      - ./articles:/usr/local/app/articles
+      - ./private:/usr/local/app/private
