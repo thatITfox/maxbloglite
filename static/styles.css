@@ -11,30 +11,44 @@ html {
     height: 100%;
 }
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --font-vcr: VCR OSD Mono;
+    --bg: #4b5563;
+}
+
 body {
-    background-color: #4b5563;
-    margin: 0px;
+    background-color: var(--bg);
 }
 
 a {
     color: rgb(165 243 252);
 }
 
+#header-wrapper {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg);
+}
+
 #header {
+    width: 90%;
     display: flex;
     justify-content: space-between;
-    width: 90%;
     align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
-
+    margin-inline: auto;
+    padding-block: 1rem;
 }
 
 #header ul {
     list-style-type: none;
     display: flex;
-    padding-left: 0px;
+    padding-left: 0;
     gap: 1.5rem;
     justify-content: space-evenly;
 }
@@ -42,7 +56,7 @@ a {
 #header a {
     text-decoration: none;
     color: white;
-    font-family: VCR OSD Mono;
+    font-family: var(--font-vcr);
 }
 
 #header #main-header-title {
@@ -66,6 +80,7 @@ a {
     justify-content: center;
     width: 50%;
 }
+
 #welcome-tags img {
     max-width: 100%;
     height: auto;
@@ -76,10 +91,15 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: VCR OSD mono;
+    font-family: var(--font-vcr);
     color: white;
     text-align: center;
     width: 50%;
+}
+
+#welcome-page > :is(h1, p, a):not(:last-child) {
+    margin-bottom: 0.75rem;
+    line-height: 1rem;
 }
 
 /* post/article scoped css */
@@ -98,7 +118,7 @@ a {
 
 .content-post :is(h1, h2, h3, h4, h5, h6) {
     text-align: center;
-    font-family: VCR OSD Mono;
+    font-family: var(--font-vcr);
 }
 
 .content-post img {
@@ -115,6 +135,7 @@ a {
     border-width: 1px;
     padding: 5px;
 }
+
 .content-post th {
     background-color: #0284c7;
 }
@@ -128,7 +149,7 @@ a {
     padding-top: 1rem;
     padding-bottom: 80px;
     color: white;
-    font-family: VCR OSD Mono;
+    font-family: var(--font-vcr);
     text-align: center;
 }
 
@@ -153,7 +174,7 @@ a {
     justify-content: center;
     margin-bottom: 1rem;
     color: white;
-    font-family: VCR OSD Mono;
+    font-family: var(--font-vcr);
     text-align: center;
 }
 
@@ -175,7 +196,7 @@ a {
 
 #post-navigation a {
     color: white;
-    font-family: VCR OSD Mono;
+    font-family: var(--font-vcr);
 }
 
 #current-page {
@@ -183,13 +204,13 @@ a {
     color: white;
     justify-content: center;
     align-items: center;
-    font-family: VCR OSD Mono;
+    font-family: var(--font-vcr);
     font-size: 2rem;
 }
 
 #no-posts {
     color: white;
-    font-family: VCR OSD Mono;
+    font-family: var(--font-vcr);
     font-size: 2rem;
 }
 
@@ -212,9 +233,9 @@ a {
     align-items: center;
     justify-content: center;
     color: white;
-    font-family: VCR OSD Mono;
+    font-family: var(--font-vcr);
     text-align: center;
-    width: 100% ;
+    width: 100%;
 }
 
 #about-page p {
@@ -230,9 +251,7 @@ a {
     }
 
     /* index stuff */
-    #welcome-tags {
-        width: 100%;
-    }
+    #welcome-tags,
     #welcome-page {
         width: 100%;
     }

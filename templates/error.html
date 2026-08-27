@@ -9,14 +9,7 @@
     <script src="/static/main.js" defer></script>
 </head>
 <body>
-    <div id="header">
-        <a href="/" id="main-header-title">Max The Computer Fox</a>
-        <ul class="header-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/articles">Posts</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
-    </div>
+    {% include '_navbar.html' %}
     <div id="error-content">
         {{error}}
         <img src="/static/max.gif" alt="Weeeee">

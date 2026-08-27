@@ -2,7 +2,7 @@
 const headerTitle = document.getElementById("main-header-title");
 const orientationQuery = window.matchMedia("(orientation: portrait)");
 
-function handleOrientationChange(e) {
+const handleOrientationChange = (e) => {
     if (e.matches) {
         // Portrait mode
         headerTitle.innerText = "MTCF";
