@@ -6,13 +6,20 @@ import datetime
 import rfeed
 import os
 
+
+def verify_pathfile(rel_path: str):
+    if not os.path.exists(rel_path):
+        os.mkdir(rel_path)
+
+
 # check if there exist an articles folder, if not make one:
-if not os.path.exists("articles"): os.mkdir("articles")
-if not os.path.exists("articles/files"): os.mkdir("articles/files")
+verify_pathfile("articles")
+verify_pathfile("articles/files")
 
 # for private articles
-if not os.path.exists("private"): os.mkdir("private")
-if not os.path.exists("private/files"): os.mkdir("private/files")
+verify_pathfile("private")
+verify_pathfile("private/files")
+
 
 def sanitize_filename(filename: str):
     safe_filename = filename.strip().replace("\n", "").replace("\r", "")
@@ -32,7 +39,7 @@ def articles():
         user_page = int(user_page)
     except:
         return render_template(
-            "error.html", 
+            "error.html",
             error="sorry, but that's not a page number comrade"
         ), 500
 
@@ -48,7 +55,7 @@ def articles():
 def post(content_type: str, filename: str):
     # 100% unsafe shit without proper sanitization, luckly I am an experienced
     # CTF player and I know what you silly fluff butts usually try to do, so here
-    # are some sanitization (but if you do found any vulnerabilities in this website 
+    # are some sanitization (but if you do found any vulnerabilities in this website
     # ill gladly put you in an upcoming hall of fame):
 
     safe_content_type = sanitize_filename(content_type)
@@ -56,10 +63,11 @@ def post(content_type: str, filename: str):
 
     if not (safe_content_type in ["private", "articles", "post"]):
         return render_template("error.html", error="That's not a propper content type comrade"), 404
-    
-    # I know this is bad code design and more of a dumb hack, but it's too late to 
+
+    # I know this is bad code design and more of a dumb hack, but it's too late to
     # redesign this as I want to minimize link rot
-    if safe_content_type == "post": safe_content_type = "articles"
+    if safe_content_type == "post":
+        safe_content_type = "articles"
 
     with open(f"{safe_content_type}/{safe_filename}.md", "r") as f:
         title = f.readline().strip().replace("#", "")
@@ -77,7 +85,7 @@ def files(content_type: str, filename: str):
     safe_content_type = sanitize_filename(content_type)
     if not (safe_content_type in ["private", "articles"]):
         return render_template("error.html", error="That's not a propper content type comrade"), 404
-    
+
     safe_filename = sanitize_filename(filename)
     return send_from_directory(f"{safe_content_type}/files", safe_filename)
 
@@ -99,11 +107,12 @@ def feed():
             pubDate=datetime.datetime.strptime(post.get("date"), "%Y/%m/%d")
         )
         feeded_articles.append(item_post)
-    
+
     feed = rfeed.Feed(
         title="Max The Computer Fox's small bloggin site",
         link="https://maxthecomputerfox.online/",
-        image=rfeed.Image("https://maxthecomputerfox.online/static/maxicon.png", "Max Icon", "https://maxthecomputerfox.online"),
+        image=rfeed.Image("https://maxthecomputerfox.online/static/maxicon.png",
+                          "Max Icon", "https://maxthecomputerfox.online"),
         description="Welcome to Max's blogging site, where I make and post my crazy ideas",
         language="en-US",
         items=feeded_articles
