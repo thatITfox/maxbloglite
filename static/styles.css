@@ -57,7 +57,7 @@ a {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 50px;
+    padding-bottom: 90px;
     height: 50%;
 }
 
@@ -80,6 +80,18 @@ a {
     color: white;
     text-align: center;
     width: 50%;
+}
+
+#welcome-page p {
+    margin: 10px;
+}
+
+#welcome-page ul {
+    margin: 0px;
+}
+
+#welcome-page li {
+    margin-top: 5px;
 }
 
 /* post/article scoped css */
