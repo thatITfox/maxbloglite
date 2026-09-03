@@ -5,5 +5,5 @@ services:
       - "8000:80"
     restart: unless-stopped
     volumes:
-      - ./articles:/usr/local/app/articles
-      - ./private:/usr/local/app/private
+      - ${CONTENT_FOLDER}./articles:/usr/local/app/articles
+      - ${CONTENT_FOLDER}./private:/usr/local/app/private
